@@ -1,0 +1,29 @@
+{
+  "name": "jsonn-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Jason Nguyen",
+  "license": "ISC",
+  "type": "module",
+  "bin": {
+    "jasonn-server": "src/bin.js"
+  },
+  "scripts": {
+    "dev": "env-cmd -f .env.development nodemon src/index.js",
+    "start": "npm run generate-data && env-cmd -f .env node src/index.js",
+    "generate-data": "node src/generate-data.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "json-server": "^0.17.4",
+    "jsonwebtoken": "^9.0.2",
+    "query-string": "^9.0.0",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "nodemon": "^3.1.3"
+  }
+}
