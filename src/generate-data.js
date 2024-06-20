@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import fs from "fs";
 
-function cretateParentDocs(schema, numOfDocument = 5) {
+export function createDocument(schema, numOfDocument = 5) {
   if (typeof numOfDocument !== "number") {
     throw new Error("Invalid number of documents");
   }
@@ -24,7 +24,12 @@ function cretateParentDocs(schema, numOfDocument = 5) {
   return documentList;
 }
 
-function createChildDocs(parentDocList, schema, parentKey, numOfDocument = 5) {
+export function createRelativeDocument(
+  parentDocList,
+  schema,
+  parentKey,
+  numOfDocument = 5
+) {
   if (typeof numOfDocument !== "number") {
     throw new Error("Invalid number of documents");
   }
@@ -63,15 +68,15 @@ const product = {
   image: faker.image.url({ width: 200, height: 300 }),
 };
 
-const categoryList = cretateParentDocs(category);
-const productList = createChildDocs(categoryList, product, "category");
+const categoryList = createDocument(category);
+const productList = createRelativeDocument(categoryList, product, "category");
 
 const database = {
   categories: categoryList,
   products: productList,
 };
 
-function createDatabase(database) {
+export function createDatabase(database) {
   fs.writeFile("public/db.json", JSON.stringify(database), () =>
     console.log("🚀 Generate data successfully!")
   );
